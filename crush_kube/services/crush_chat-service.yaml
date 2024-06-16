@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: crush-chat
+spec:
+  selector:
+    app: crush-chat
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: crush-chat-mysql
+spec:
+  selector:
+    app: crush-chat
+  ports:
+  - protocol: TCP
+    port: 3306
+    targetPort: 3306

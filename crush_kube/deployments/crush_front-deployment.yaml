@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crush-front
+  labels:
+    app: crush-front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crush-front
+  template:
+    metadata:
+      labels:
+        app: crush-front
+    spec:
+      containers:
+      - name: crush-front
+        image: your-docker-repo/crush-front:latest
+        ports:
+        - containerPort: 80

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crush-chat
+  labels:
+    app: crush-chat
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crush-chat
+  template:
+    metadata:
+      labels:
+        app: crush-chat
+    spec:
+      containers:
+      - name: crush-chat
+        image: your-docker-repo/crush-chat:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:mysql://crush-chat-mysql:3306/chatdb"
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: crush-chat-secret
+              key: username
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: crush-chat-secret
+              key: password
+      - name: crush-chat-mysql
+        image: mysql:5.7
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: crush-chat-secret
+              key: password
+        - name: MYSQL_DATABASE
+          value: "chatdb"

@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crush-match
+  labels:
+    app: crush-match
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crush-match
+  template:
+    metadata:
+      labels:
+        app: crush-match
+    spec:
+      containers:
+      - name: crush-match
+        image: your-docker-repo/crush-match:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:mysql://crush-match-mysql:3306/matchdb"
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: crush-match-secret
+              key: username
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: crush-match-secret
+              key: password
+      - name: crush-match-mysql
+        image: mysql:5.7
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: crush-match-secret
+              key: password
+        - name: MYSQL_DATABASE
+          value: "matchdb"

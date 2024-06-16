@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crush-user
+  labels:
+    app: crush-user
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crush-user
+  template:
+    metadata:
+      labels:
+        app: crush-user
+    spec:
+      containers:
+      - name: crush-user
+        image: your-docker-repo/crush-user:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:mysql://crush-user-mysql:3306/userdb"
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: crush-user-secret
+              key: username
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: crush-user-secret
+              key: password
+      - name: crush-user-mysql
+        image: mysql:5.7
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: crush-user-secret
+              key: password
+        - name: MYSQL_DATABASE
+          value: "userdb"
