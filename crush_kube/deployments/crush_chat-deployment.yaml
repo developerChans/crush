@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: crush-chat
-        image: your-docker-repo/crush-chat:latest
+        image: developerchans/crush/crush-chat:latest
         ports:
         - containerPort: 8080
         env:

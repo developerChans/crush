@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS chat_message (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    senderId BIGINT NOT NULL,
+    receiverId BIGINT NOT NULL,
+    content TEXT NOT NULL
+);

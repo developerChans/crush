@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # 설정 변수
-SERVICES=("crush-chat" "crush-front" "crush-match" "crush-user")
-DOCKER_REPO="your-docker-repo"
+SERVICES=("crush_chat" "crush_match" "crush_user")
+# SERVICES=("crush_chat" "crush_front" "crush_match" "crush_user")
+DOCKER_REPO="develooper/crush"
 VERSION=$(date +%Y%m%d%H%M%S)
 
 for SERVICE in "${SERVICES[@]}"; do

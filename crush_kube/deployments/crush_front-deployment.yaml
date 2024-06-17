@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: crush-front
-        image: your-docker-repo/crush-front:latest
+        image: developerchans/crush/crush-front:latest
         ports:
         - containerPort: 80
