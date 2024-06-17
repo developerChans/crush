@@ -1,18 +1,10 @@
-FROM openjdk:17-jre-slim
+FROM openjdk:17
 
 # 작업 디렉터리 설정
 WORKDIR /app
 
 # Jar 파일 복사
-COPY build/libs/match-service.jar /app/app.jar
-
-# MySQL 설치 및 설정
-RUN apt-get update && apt-get install -y mysql-server && \
-    service mysql start && \
-    mysql -e "CREATE DATABASE userdb;" && \
-    mysql -e "CREATE USER 'root'@'%' IDENTIFIED BY 'password';" && \
-    mysql -e "GRANT ALL PRIVILEGES ON userdb.* TO 'root'@'%';" && \
-    mysql -e "FLUSH PRIVILEGES;"
+COPY build/libs/match_service-0.0.1-SNAPSHOT.jar /app/app.jar
 
 # MySQL 초기화 스크립트 복사
 COPY init-match-db.sql /docker-entrypoint-initdb.d/

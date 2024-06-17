@@ -7,7 +7,7 @@ spec:
     app: crush-match
   ports:
   - protocol: TCP
-    port: 80
+    port: 8082
     targetPort: 8080
 ---
 apiVersion: v1
