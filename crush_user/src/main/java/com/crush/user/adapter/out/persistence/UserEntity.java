@@ -1,6 +1,6 @@
 package com.crush.user.adapter.out.persistence;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 public class UserEntity {

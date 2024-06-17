@@ -1,3 +1,4 @@
+GRANT ALL PRIVILEGES ON *.* TO 'root1'@'localhost';
 CREATE DATABASE IF NOT EXISTS user_db;
 USE user_db;
 

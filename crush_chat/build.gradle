@@ -26,7 +26,9 @@ dependencies {
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
 	implementation group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'junit:junit:4.13.1'	
+	runtimeOnly 'com.mysql:mysql-connector-j'
+
 }
 
 tasks.named('test') {

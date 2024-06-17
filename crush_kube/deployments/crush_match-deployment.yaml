@@ -16,31 +16,20 @@ spec:
     spec:
       containers:
       - name: crush-match
-        image: developerchans/crush/crush-match:latest
+        image: developerchans/crush_match:latest
         ports:
         - containerPort: 8080
         env:
         - name: SPRING_DATASOURCE_URL
           value: "jdbc:mysql://mysql:3306/match_db"
         - name: SPRING_DATASOURCE_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: crush-match-secret
-              key: username
+          value: test1
         - name: SPRING_DATASOURCE_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: crush-match-secret
-              key: password
-      - name: crush-match-mysql
-        image: mysql:5.7
-        ports:
-        - containerPort: 3306
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: crush-match-secret
-              key: password
-        - name: MYSQL_DATABASE
-          value: "matchdb"
+          value: test1!
+        - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
+          value: com.mysql.cj.jdbc.Driver
+        - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+          value: update
+        - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
+          value: org.hibernate.dialect.MySQLDialect
+

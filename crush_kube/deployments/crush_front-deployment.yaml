@@ -16,6 +16,9 @@ spec:
     spec:
       containers:
       - name: crush-front
-        image: developerchans/crush/crush-front:latest
+        image: developerchans/crush_front:latest
         ports:
         - containerPort: 80
+
+---
+
